@@ -11,6 +11,8 @@ import pe.edu.cibertec.patitas_backend_b.dto.LoginRequestDTO;
 import pe.edu.cibertec.patitas_backend_b.dto.LoginResponseDTO;
 import pe.edu.cibertec.patitas_backend_b.service.AutenticacionService;
 
+import java.time.Duration;
+import java.util.Arrays;
 
 
 //ME PERMITE QUE ESTA CLASE SEA EL COMPONENTE PADRE QUE ME HABILITE UNA SERIE DE PATH QUE SERAN LAS URL DE MIS SERVICIOS
@@ -27,7 +29,14 @@ public class AutenticacionController {
 
 
         try {
+
+            //Para ejecutar en un hilo en 10 segundos
+            Thread.sleep(Duration.ofSeconds(5));
+
             String[] datosUsuario=autenticacionService.validarUsuario(loginRequestDTO);
+
+            System.out.println("Respuesta Backend: " + Arrays.toString(datosUsuario));
+
             if(datosUsuario == null){
 
                 return new LoginResponseDTO("01","Error: Usuarios no encontrado","","");
